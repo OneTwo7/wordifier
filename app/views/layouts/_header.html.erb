@@ -1,9 +1,10 @@
 <header>
 	<nav>
-		<%= link_to "Words",  root_path, id: "logo" %>
-		<%= link_to "Help",   help_path %>
+		<%= link_to "Wordifier", root_path, id: "logo" %>
+		<%= link_to "Help", help_path %>
+		<%= link_to "Words", words_path %>
 		<% if logged_in? %>
-			<%= link_to "Users", users_path %>
+			<%= link_to "Users", users_path if current_user.admin? %>
 			<%= link_to "Profile", current_user %>
 			<%= link_to "Settings", edit_user_path(current_user) %>
 			<%= link_to "Log out", logout_path, method: :delete %>

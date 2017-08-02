@@ -1,0 +1,11 @@
+one:
+  word: word
+  definition: definition
+  sentence: sentence
+
+<% 60.times do |n| %>
+word_<%= n %>:
+  word:  <%= "word #{n}" %>
+  definition: definition
+  sentence: sentence
+<% end %>

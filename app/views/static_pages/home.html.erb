@@ -1,3 +1,8 @@
 <h1>StaticPages#home</h1>
 <p>Welcome to Words</p>
-<%= link_to "Sign up", signup_path %>
+<% if logged_in? %>
+	<%= link_to "Add new word", new_word_path %>
+	<%= link_to "Study words", study_path if current_user.words_to_study.any? %>
+<% else %>
+	<%= link_to "Sign up", signup_path %>
+<% end %>

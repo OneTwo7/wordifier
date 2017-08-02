@@ -1,0 +1,2 @@
+var $form = $("#add_form_<%= @word.id %>");
+$form.html("<%= escape_javascript(render('words/add', word: @word)) %>");

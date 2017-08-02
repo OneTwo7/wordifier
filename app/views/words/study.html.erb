@@ -1,0 +1,14 @@
+<% if session[:done].nil? %>
+
+	<h1><%= @word.word %></h1>
+
+	<%= link_to "nope", study_path(button: "nope") %>
+	<%= link_to "yeah", study_path(button: "yeah") %>
+	<%= link_to "easy", study_path(button: "easy") %>
+	<%= link_to "know", study_path(button: "know") %>
+
+<% else %>
+
+	<p>You studied all words for today</p>
+
+<% end %>

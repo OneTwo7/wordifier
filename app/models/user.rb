@@ -1,5 +1,8 @@
 class User < ApplicationRecord
 
+  has_many :relationships, dependent: :destroy
+  has_many :words, through: :relationships
+
 	attr_accessor :remember_token, :activation_token, :reset_token
 
 	before_save 	:downcase_email
@@ -15,7 +18,7 @@ class User < ApplicationRecord
 	has_secure_password
 
 	# Returns the hash digest of the given string.
-  def self.digest(string)
+  def self.digest (string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
@@ -33,7 +36,7 @@ class User < ApplicationRecord
   end
 
   # Returns true if the given token matches the digest.
-  def authenticated?(attribute, token)
+  def authenticated? (attribute, token)
   	digest = send("#{attribute}_digest")
   	return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
@@ -69,6 +72,26 @@ class User < ApplicationRecord
   # Returns true if a password reset has expired.
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
+  end
+
+  # Adds a word
+  def add (word)
+    words << word
+  end
+
+  # Removes a word
+  def remove (word)
+    words.delete(word)
+  end
+
+  # Returns true if the word is added
+  def added? (word)
+    words.include?(word)
+  end
+
+  # Returns words due to study today
+  def words_to_study
+    words.where("study_at <= ?", Time.zone.now.end_of_day)
   end
 
 

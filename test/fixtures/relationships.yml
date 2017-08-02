@@ -1,0 +1,23 @@
+one:
+  user:     one
+  word:     word_0
+  points:   0
+  study_at: <%= Date.current %>
+
+two:
+  user:     one
+  word:     word_1
+  points:   0
+  study_at: <%= Date.current %>
+
+three:
+  user:     one
+  word:     word_2
+  points:   0
+  study_at: <%= Date.current %>
+
+four:
+  user:     one
+  word:     word_3
+  points:   0
+  study_at: <%= Date.current %>

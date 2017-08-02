@@ -1,0 +1,7 @@
+<div id="add_form_<%= word.id %>">
+	<% if current_user.added?(word) %>
+	  <%= render 'words/remove', word: word %>
+	<% else %>
+	  <%= render 'words/add', word: word %>
+	<% end %>
+</div>

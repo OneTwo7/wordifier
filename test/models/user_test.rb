@@ -77,4 +77,24 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.authenticated?(:remember, '')
   end
 
+  test "should add and remove a word" do
+    user = users(:one)
+    word = words(:one)
+    assert_not user.added?(word)
+    user.add(word)
+    assert user.added?(word)
+    assert word.users.include?(user)
+    user.remove(word)
+    assert_not user.added?(word)
+  end
+
+  test "should return words to study" do
+    user = users(:one)
+    assert_equal user.words.count, user.words_to_study.count
+    user.words_to_study.each do |word|
+      user.relationships.find_by(word_id: word.id).study
+    end
+    assert_equal 0, user.words_to_study.count
+  end
+
 end

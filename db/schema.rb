@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170524202936) do
+ActiveRecord::Schema.define(version: 20170529070931) do
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "word_id"
+    t.integer  "points",     default: 0
+    t.datetime "study_at"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["user_id", "word_id", "study_at"], name: "index_relationships_on_user_id_and_word_id_and_study_at"
+    t.index ["user_id", "word_id", "updated_at"], name: "index_relationships_on_user_id_and_word_id_and_updated_at"
+    t.index ["user_id", "word_id"], name: "index_relationships_on_user_id_and_word_id", unique: true
+    t.index ["user_id"], name: "index_relationships_on_user_id"
+    t.index ["word_id"], name: "index_relationships_on_word_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -26,6 +40,15 @@ ActiveRecord::Schema.define(version: 20170524202936) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.index ["email"], name: "index_users_on_email"
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.string   "word"
+    t.string   "definition"
+    t.string   "sentence"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["word"], name: "index_words_on_word"
   end
 
 end

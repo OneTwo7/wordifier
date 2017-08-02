@@ -9,8 +9,15 @@ Rails.application.routes.draw do
   get  	 '/login',   to: 'sessions#new'
   post 	 '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  resources :users, except: [:new, :create]
+  get    '/study',   to: 'words#study'
+  resources :users, except: [:new, :create] do
+    member do
+      get :words
+    end
+  end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
+  resources :words
+  resources :relationships,       only: [:create, :destroy]
 
 end
