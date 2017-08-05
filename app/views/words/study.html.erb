@@ -1,14 +1,12 @@
-<% if session[:done].nil? %>
+<% provide(:title, "Study") %>
 
-	<h1><%= @word.word %></h1>
+<main id="word_study_field">
+  <%= render "word_study_field", word: @word %>
+</main>
 
-	<%= link_to "nope", study_path(button: "nope") %>
-	<%= link_to "yeah", study_path(button: "yeah") %>
-	<%= link_to "easy", study_path(button: "easy") %>
-	<%= link_to "know", study_path(button: "know") %>
-
-<% else %>
-
-	<p>You studied all words for today</p>
-
-<% end %>
+<script>
+	(function () {
+		"use strict";
+		words_global_object.prepare_study_field();
+	}());
+</script>

@@ -27,10 +27,16 @@ class Relationship < ApplicationRecord
 			"easy" => [points + 1, done ? nil : Date.current + intervals[1]],
 			"know" => [5, Date.current + 7]
 		}
-		update_columns(
-      points:   button_to_columns[button][0],
-      study_at: button_to_columns[button][1].to_datetime
-    )
+		unless done
+			update_columns(
+	      points:   	button_to_columns[button][0],
+	      study_at: 	button_to_columns[button][1].to_datetime,
+	      updated_at: Time.zone.now
+	    )
+		else
+			user = self.user
+			user.remove(self.word)
+		end
 	end
 
 	private

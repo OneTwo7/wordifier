@@ -6,7 +6,7 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
 		@base_title = "Words"
 		@word       = words(:one)
 		@admin      = users(:one)
-		@other       = users(:two)
+		@other      = users(:two)
 	end
 
 	test "should get words index" do
@@ -15,6 +15,17 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
 		assert_template "words/index"
 		assert_select "title", "All words | #{@base_title}"
 		assert_select 'div.pagination', count: 2
+	end
+
+	test "should get appropriate words lists" do
+		log_in_as(@other)
+		lists = %w[words words_to_study studied new_words known_words learned_words]
+		lists.each do |list|
+			get words_path(list: list)
+			assert_response :success
+			assert_template "words/index"
+			assert_select "ul.words li", count: @other.send(list).count
+		end
 	end
   
 	test "should get show word" do

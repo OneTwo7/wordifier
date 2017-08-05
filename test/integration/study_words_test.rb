@@ -42,7 +42,7 @@ class StudyWordsTest < ActionDispatch::IntegrationTest
   		rel.reload
   		assert_equal pars[button][0], rel.points
   		assert_equal Date.current + pars[button][1], rel.study_at
-  		if session[:done].nil?
+  		unless assigns(:word).nil?
   			ids = session[:words_ids]
   			assert_equal len - 1, ids.length
   			assert_select "h1", Word.find(ids.first).word

@@ -1,0 +1,5 @@
+"use strict";
+var $main = $("#word_study_field");
+var main = "<%= escape_javascript(render 'word_study_field', word: @word) %>";
+$main.html(main);
+words_global_object.prepare_study_field();

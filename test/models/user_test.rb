@@ -97,4 +97,14 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 0, user.words_to_study.count
   end
 
+  test "should return appropriate words lists" do
+    user = users(:one)
+    assert_equal 4, user.words.count
+    assert_equal 4, user.words_to_study.count
+    assert_equal 0, user.studied.count
+    assert_equal 4, user.new_words.count
+    assert_equal 0, user.known_words.count
+    assert_equal 0, user.learned_words.count
+  end
+
 end

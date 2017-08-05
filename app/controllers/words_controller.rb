@@ -6,7 +6,15 @@ class WordsController < ApplicationController
 
 	def index
 		@title = "All words"
-		@words = Word.paginate(page: params[:page])
+		unless logged_in? and !params[:list].nil?
+			@words = Word.paginate(page: params[:page])
+		else
+			@words = current_user.send(params[:list]).paginate(page: params[:page])
+		end
+		respond_to do |format|
+			format.html
+			format.js
+		end
 	end
 
 	def show
@@ -47,9 +55,11 @@ class WordsController < ApplicationController
 	def study
 		if session[:words_ids].nil?
 			ids = current_user.words_to_study.pluck(:id)
-			to_study_ids = ids.shuffle[0...20]
-			session[:words_ids] = to_study_ids
-			@word = Word.find(to_study_ids.first)
+			unless ids.empty?
+				to_study_ids = ids.shuffle[0...20]
+				session[:words_ids] = to_study_ids
+				@word = Word.find(to_study_ids.first)
+			end
 		else
 			if params[:button].nil?
 				@word = Word.find(session[:words_ids].first)
@@ -62,9 +72,12 @@ class WordsController < ApplicationController
 					@word = Word.find(session[:words_ids].first)
 				else
 					session.delete(:words_ids)
-					session[:done] = true
 				end
 			end
+		end
+		respond_to do |format|
+			format.html
+			format.js
 		end
 	end
 

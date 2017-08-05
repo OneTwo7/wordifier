@@ -21,3 +21,35 @@ four:
   word:     word_3
   points:   0
   study_at: <%= Date.current %>
+
+<% 10.times do |n| %>
+rel_<%= n %>:
+  user:     two
+  word:     word_<%= n %>
+  points:   0
+  study_at: <%= Date.current %>
+<% end %>
+
+<% 5.times do |n| %>
+rel_<%= n + 10 %>:
+  user:     two
+  word:     word_<%= n + 10 %>
+  points:   1
+  study_at: <%= Date.current + 2 %>
+<% end %>
+
+<% 5.times do |n| %>
+rel_<%= n + 15 %>:
+  user:     two
+  word:     word_<%= n + 15 %>
+  points:   5
+  study_at: <%= Date.current + 7 %>
+<% end %>
+
+<% 5.times do |n| %>
+rel_<%= n + 20 %>:
+  user:     two
+  word:     word_<%= n + 20 %>
+  points:   8
+  study_at: <%= Date.current + 14 %>
+<% end %>

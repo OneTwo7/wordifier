@@ -94,6 +94,31 @@ class User < ApplicationRecord
     words.where("study_at <= ?", Time.zone.now.end_of_day)
   end
 
+  # Returns words studied today
+  def studied
+    end_of_day = Time.zone.now.end_of_day
+    beginning_of_day = Time.zone.now.beginning_of_day
+    ids = "SELECT word_id FROM relationships
+           WHERE user_id = :id AND study_at > :end AND updated_at > :beg"
+    Word.where("id in (#{ids})", id: self.id, end: end_of_day,
+                                              beg: beginning_of_day)
+  end
+
+  # Returns new words
+  def new_words
+    words.where("points < ?", 5)
+  end
+
+  # Returns known words
+  def known_words
+    words.where("points BETWEEN ? AND ?", 5, 7)
+  end
+
+  # Returns learned words
+  def learned_words
+    words.where("points BETWEEN ? AND ?", 8, 9)
+  end
+
 
   private
 

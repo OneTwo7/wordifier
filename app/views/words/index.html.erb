@@ -2,6 +2,20 @@
 
 <h1><%= @title %></h1>
 
+<% if logged_in? %>
+
+	<nav id="word_lists">
+		<%= link_to "All", words_path, remote: true %>
+		<%= link_to "Added", words_path(list: "words"), remote: true %>
+		<%= link_to "To study", words_path(list: "words_to_study"), remote: true %>
+		<%= link_to "Studied", words_path(list: "studied"), remote: true %>
+		<%= link_to "New", words_path(list: "new_words"), remote: true %>
+		<%= link_to "Known", words_path(list: "known_words"), remote: true %>
+		<%= link_to "Learned", words_path(list: "learned_words"), remote: true %>
+	</nav>
+
+<% end %>
+
 <%= will_paginate @words %>
 
 <ul class="words">

@@ -1,4 +1,16 @@
 <% provide(:title, @user.name) %>
 
 <p><%= @user.name %></p>
-<%= link_to "Words: #{@user.words.count}", words_user_path(@user) %>
+<ul>
+	<li><%= link_to "Words: #{@user.words.count}", words_user_path(@user) %></li>
+	<li><%= link_to "To study today: #{@user.words_to_study.count}",
+							words_path(list: "words_to_study") %></li>
+	<li><%= link_to "Studied today: #{@user.studied.count}",
+							words_path(list: "studied") %></li>
+	<li><%= link_to "New words: #{@user.new_words.count}",
+							words_path(list: "new_words") %></li>
+	<li><%= link_to "Known words: #{@user.known_words.count}",
+							words_path(list: "known_words") %></li>
+	<li><%= link_to "Learned words: #{@user.learned_words.count}",
+							words_path(list: "learned_words") %></li>
+</ul>

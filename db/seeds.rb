@@ -41,7 +41,7 @@ words = [
   },
   {
     word: "affidavit",
-    definition: "a document validation something",
+    definition: "a document that validates something",
     sentence: "That's a kind of unconcealed lie that he put in his affidavit."
   },
   {
