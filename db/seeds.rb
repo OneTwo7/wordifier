@@ -74,3 +74,9 @@ end
 
 user  = User.first
 Word.all[0..5].each { |word| user.add(word) }
+
+150.times do |num|
+  Word.create!(word: "word_#{num}",
+               definition: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean finibus velit at metus pulvinar, nec gravida magna bibendum. Pellentesque id nisl dolor. Aenean a purus ipsum. Aenean hendrerit tortor non magna commodo fermentum.",
+               sentence:   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean finibus velit at metus pulvinar, nec gravida magna bibendum. Pellentesque id nisl dolor. Aenean a purus ipsum. Aenean hendrerit tortor non magna commodo fermentum.")
+end

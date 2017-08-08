@@ -1,5 +1,5 @@
 <li>
-	<%= link_to word.word, word %>
+	<%= link_to word.word, word, remote: true %>
 	<% if logged_in? %>
 	<%= render "words/add_form", word: word %>
 		<% if current_user.admin? %>

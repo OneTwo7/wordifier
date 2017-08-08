@@ -13,5 +13,6 @@ class CreateRelationships < ActiveRecord::Migration[5.0]
     add_index :relationships, [:user_id, :word_id], unique: true
     add_index :relationships, [:user_id, :word_id, :study_at]
     add_index :relationships, [:user_id, :word_id, :updated_at]
+    add_index :relationships, [:user_id, :updated_at, :study_at]
   end
 end

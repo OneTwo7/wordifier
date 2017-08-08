@@ -16,10 +16,24 @@
 
 <% end %>
 
-<%= will_paginate @words %>
+<div id="word-modal">
+	<div></div>
+	<button type="button">Close</button>
+</div>
 
-<ul class="words">
-	<%= render @words %>
-</ul>
+<div id="words_list">
+	<%= render "words", words: @words %>
+</div>
 
-<%= will_paginate @words %>
+<script>
+	(function () {
+		"use strict";
+		var $modal = $("#word-modal");
+		$modal.hide();
+		$modal.children("button").on("click", function () {
+			$modal.hide();
+		});
+
+		$(".pagination a").attr("data-remote", "true");
+	}());
+</script>

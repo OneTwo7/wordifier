@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20170529070931) do
     t.datetime "study_at"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.index ["user_id", "updated_at", "study_at"], name: "index_relationships_on_user_id_and_updated_at_and_study_at"
     t.index ["user_id", "word_id", "study_at"], name: "index_relationships_on_user_id_and_word_id_and_study_at"
     t.index ["user_id", "word_id", "updated_at"], name: "index_relationships_on_user_id_and_word_id_and_updated_at"
     t.index ["user_id", "word_id"], name: "index_relationships_on_user_id_and_word_id", unique: true

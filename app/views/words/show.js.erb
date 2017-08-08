@@ -1,0 +1,6 @@
+"use strict";
+var $modal = $("#word-modal");
+var $field = $modal.children("div");
+var word = "<%= escape_javascript(render 'show_word', word: @word) %>";
+$field.html(word);
+$modal.hide().fadeIn("slow");

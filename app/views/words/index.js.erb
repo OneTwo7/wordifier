@@ -1,2 +1,5 @@
 "use strict";
-$("ul.words").html("<%= escape_javascript(render @words) %>");
+var $words_list = $("#words_list");
+$words_list.empty();
+var words = "<%= escape_javascript(render 'words', words: @words) %>";
+$words_list.append(words);
