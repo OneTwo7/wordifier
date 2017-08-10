@@ -3,7 +3,6 @@ require 'test_helper'
 class WordsControllerTest < ActionDispatch::IntegrationTest
 
 	def setup
-		@base_title = "Words"
 		@word       = words(:one)
 		@admin      = users(:one)
 		@other      = users(:two)
@@ -13,7 +12,7 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
 		get words_path
 		assert_response :success
 		assert_template "words/index"
-		assert_select "title", "All words | #{@base_title}"
+		assert_select "title", get_title("Words")
 		assert_select 'div.pagination', count: 2
 	end
 
@@ -32,7 +31,7 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
 		get word_path(@word)
 		assert_response :success
 		assert_template "show"
-		assert_select "title", "#{@word.word.capitalize} | #{@base_title}"
+		assert_select "title", get_title("#{@word.word.capitalize}")
 	end
 
 	test "should redirect new if not logged in" do
@@ -45,7 +44,7 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
 		get new_word_path
 		assert_response :success
 		assert_template "new"
-		assert_select "title", "New word | #{@base_title}"
+		assert_select "title", get_title("New word")
 	end
 
 	test "should redirect edit if not logged in as admin" do
@@ -59,7 +58,7 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
 		get edit_word_path(@word)
 		assert_response :success
 		assert_template "edit"
-		assert_select "title", "Edit word | #{@base_title}"
+		assert_select "title", get_title("Edit word")
 	end
 
 	test "should redirect create when not logged in" do

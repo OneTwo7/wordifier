@@ -5,7 +5,7 @@ class WordsController < ApplicationController
 	before_action :admin_user,     only: [:edit, :update, :destroy]
 
 	def index
-		@title = "All words"
+		@title = "Words"
 		unless logged_in? and !params[:list].nil?
 			@words = Word.paginate(page: params[:page])
 		else

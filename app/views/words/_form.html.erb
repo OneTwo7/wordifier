@@ -1,4 +1,4 @@
-<%= form_for(@word) do |f| %>
+<%= form_for(@word, html: {class: "form"}) do |f| %>
 
 	<%= render "shared/error_messages", object: @word %>
 
@@ -11,6 +11,6 @@
 	<%= f.label :sentence %>
 	<%= f.text_area :sentence, class: "form-control" %>
 
-	<%= f.submit submit_text %>
+	<%= f.submit submit_text, class: "btn" %>
 
 <% end %>
