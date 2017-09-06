@@ -1,23 +1,44 @@
-'use strict';
+'use strict'
 
 @words_global_object =
 	prepare_study_field: ->
 		$sentence   = $ '#sen'
 		$definition = $ '#def'
 
-		disclose = ($btn, $br, $p) ->
-			$btn.hide()
-			$br.remove()
-			$p.fadeIn(500)
+		disclose = ($btn, $p) ->
+			$btn.addClass 'hidden'
+			$p.removeClass 'hidden'
 			return
 
-		$sentence.hide()
-		$definition.hide()
-
 		$('#sen_btn').on 'click', ->
-			disclose $(this), $('#br_1'), $sentence
+			disclose $(this), $sentence
 			return
 
 		$('#def_btn').on 'click', ->
-			disclose $(this), $('#br_2'), $definition
+			disclose $(this), $definition
 			return
+
+		return
+
+	prepare_word_modal: ->
+		$modal = $ '#word-modal'
+		$content = $ '#word-modal-content'
+		$close = $modal.children '.close-modal'
+		$shadow = $ '#shadow'
+
+		close_modal = ->
+			unless $modal.hasClass 'hidden'
+				$shadow.css 'z-index', 1
+				$shadow.toggleClass 'hidden'
+				$modal.toggleClass 'hidden'
+			return
+
+		$close.on 'click', ->
+			close_modal()
+			return
+
+		$shadow.on 'click', ->
+			close_modal()
+			return
+
+		return

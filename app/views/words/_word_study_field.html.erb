@@ -1,23 +1,19 @@
 <% unless word.nil? %>
 
-		<h1><%= word.word %></h1>
+	<h1><%= word.word %></h1>
 
-		<button type="button" id="sen_btn">Show sentence</button>
+	<button type="button" id="sen_btn">Show sentence</button>
 
-		<br id="br_1">
+	<p id="sen" class="hidden"><%= word.sentence %></p>
 
-		<p id="sen"><%= word.sentence %></p>
+	<button type="button" id="def_btn">Show definition</button>
 
-		<button type="button" id="def_btn">Show definition</button>
+	<p id="def" class="hidden"><%= word.definition %></p>
 
-		<br id="br_2">
-
-		<p id="def"><%= word.definition %></p>
-
-	<%= link_to "nope", study_path(button: "nope"), remote: true %>
-	<%= link_to "yeah", study_path(button: "yeah"), remote: true %>
-	<%= link_to "easy", study_path(button: "easy"), remote: true %>
-	<%= link_to "know", study_path(button: "know"), remote: true %>
+	<%= link_to "nope", study_path(button: "nope"), class: "btn", remote: true %>
+	<%= link_to "yeah", study_path(button: "yeah"), class: "btn", remote: true %>
+	<%= link_to "easy", study_path(button: "easy"), class: "btn", remote: true %>
+	<%= link_to "know", study_path(button: "know"), class: "btn", remote: true %>
 
 <% else %>
 

@@ -1,31 +1,44 @@
+@import 'colors';
+
 header, main, footer {
 	max-width: 1000px;
 	margin: 0 auto;
 }
 
 header {
-	background: #000;
-	color: #fff;
+	z-index: 2;
+	background: $lighter-black;
+	color: $white;
 	margin-bottom: 40px;
 	nav {
-		display: flex;
-		justify-content: space-between;
 		padding: 2px;
 		#logo {
-			flex-grow: 5;
-			margin: 0 30px;
+			vertical-align: bottom;
+			margin-left: 30px;
 			text-transform: uppercase;
 			font-size: 3em;
-			padding-bottom: 0;
+		}
+		#nav-toggle {
+			display: none;
+		}
+		#navbar {
+			font-size: 1.5em;
+			li {
+				margin-left: 10px;
+				margin-right: 10px;
+			}
 		}
 		a {
-			flex-grow: 1;
-			align-self: flex-end;
-			font-size: 1.2em;
-			text-decoration: none;
-			padding-bottom: 4px;
+			color: $white;
 			&:visited {
-				color: #fff;
+				color: $white;
+			}
+		}
+		ul {
+			list-style: none;
+			padding-left: 0;
+			li {
+				display: inline-block;
 			}
 		}
 	}
@@ -67,6 +80,18 @@ main {
 			cursor: pointer;
 		}
 	}
+	#word-modal {
+		z-index: 4;
+		position: fixed;
+		top: 20vh;
+		left: 20%;
+		box-sizing: border-box;
+		width: 60%;
+		padding: 10px;
+		border: 1px solid $grey;
+		border-radius: .25rem;
+		background: $white;
+	}
 	#words_list, #profile {
 		width: 60%;
 		margin: 0 20%;
@@ -81,17 +106,115 @@ main {
 }
 
 footer {
-	border-top: 2px solid #000;
+	border-top: 2px solid $black;
 	margin-top: 60px;
 	text-align: right;
 	a {
 		display: inline-block;
-		text-decoration: none;
 		padding: 10px;
-		font-size: 1em;
-		color: #000;
-		&:visited {
-			color: #000;
+	}
+}
+
+@media (orientation: landscape) and (min-width: 768px) {
+	header {
+		nav {
+			#navbar {
+				float: right;
+				margin-top: 1em;
+				li:last-child {
+					margin-right: 30px;
+				}
+			}
+			#dropdown-list {
+				position: absolute;
+				top: 100%;
+				left: 0;
+				min-width: 8rem;
+				background: $white;
+				border: 1px solid $grey;
+				border-radius: .25rem;
+				padding: 10px 0;
+				margin-left: -20px;
+				li {
+					display: list-item;
+					margin: 0;
+					padding: 0 20px;
+					a, a:visited {
+						color: $lighter-black;
+					}
+				}
+				li + li {
+					margin-top: 10px;
+				}
+				li:last-child {
+					margin-right: 0;
+				}
+			}
 		}
+	}
+}
+
+@media (orientation: portrait), (max-width: 767px) {
+	body {
+		margin: 0;
+	}
+	header {
+		position: absolute;
+		width: 100%;
+		top: 0;
+		nav {
+			flex-wrap: wrap;
+			#logo {
+				display: inline-block;
+				width: auto;
+				flex-grow: 0;
+				padding: 0;
+			}
+			#nav-toggle {
+				display: inline-block;
+				float: right;
+				padding: 10px;
+				margin: 10px;
+				background: $lighter-black;
+				border: 1px solid $light-black;
+				border-radius: 5px;
+			}
+			#navbar {
+				width: 100%;
+				border-top: 1px solid $grey;
+				padding-top: 10px;
+				padding-bottom: 20px;
+				margin: 0;
+				li {
+					display: block;
+				}
+				.divider {
+					display: none;
+				}
+				#account-dropdown {
+					display: none;
+				}
+				#dropdown-list {
+					display: block;
+					a {
+						padding-left: 10px;
+					}
+				}
+			}
+			ul > li {
+				margin-top: 10px;
+			}
+			a:last-child {
+				padding-bottom: 25px;
+			}
+			a {
+				padding: 10px 20px;
+				margin: 2px auto;
+			}
+			
+		}
+	}
+	main {
+		margin-top: 6em;
 	}
 }

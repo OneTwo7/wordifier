@@ -10,7 +10,9 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body id="body">
+    <div id="shadow" class="hidden"></div>
+    <a id="up-btn" href="#" class="hidden"><span>Up</span><i></i></a>
   	<%= render 'layouts/header' %>
     <main>
       <% flash.each do |message_type, message| %>

@@ -16,9 +16,10 @@
 
 <% end %>
 
-<div id="word-modal">
-	<div></div>
-	<button type="button">Close</button>
+<div id="word-modal" class="hidden">
+	<button type="button" class="close-modal close-btn">&times;</button>
+	<div id="word-modal-content"></div>
+	<button type="button" class="close-modal btn">Close</button>
 </div>
 
 <div id="words_list">
@@ -28,12 +29,7 @@
 <script>
 	(function () {
 		"use strict";
-		var $modal = $("#word-modal");
-		$modal.hide();
-		$modal.children("button").on("click", function () {
-			$modal.hide();
-		});
-
+		words_global_object.prepare_word_modal();
 		$(".pagination a").attr("data-remote", "true");
 	}());
 </script>
