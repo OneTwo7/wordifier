@@ -3,3 +3,4 @@ var $words_list = $("#words_list");
 $words_list.empty();
 var words = "<%= escape_javascript(render 'words', words: @words) %>";
 $words_list.append(words);
+$(".pagination a").attr("data-remote", "true");

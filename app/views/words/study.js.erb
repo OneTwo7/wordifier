@@ -1,5 +1,11 @@
 "use strict";
-var $main = $("#study-field");
-var main = "<%= escape_javascript(render 'word_study_field', word: @word) %>";
-$main.html(main);
-words_global_object.prepare_study_field();
+var $field = $("#study-field");
+var word = "<%= escape_javascript(@word.word.capitalize) %>";
+var example = "<%= escape_javascript(@word.sentence) %>";
+var definition = "<%= escape_javascript(@word.definition) %>";
+
+$(".answer-field").hide();
+$(".toggle-button").removeClass("btn-light").addClass("btn-dark");
+$field.children("h1").html(word);
+$field.find("#exp p").html(example);
+$field.find("#def p").html(definition);

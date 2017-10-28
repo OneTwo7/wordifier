@@ -20,7 +20,7 @@ class StudyWordsTest < ActionDispatch::IntegrationTest
 
   test "should present correct study UI" do
   	get study_path
-  	assert_select "h1", Word.find(session[:words_ids].first).word
+  	assert_select "h1", Word.find(session[:words_ids].first).word.capitalize
   	@buttons.each do |button|
   		assert_select "a[href^=?]", study_path, text: button
   	end
@@ -45,7 +45,7 @@ class StudyWordsTest < ActionDispatch::IntegrationTest
   		unless assigns(:word).nil?
   			ids = session[:words_ids]
   			assert_equal len - 1, ids.length
-  			assert_select "h1", Word.find(ids.first).word
+  			assert_select "h1", Word.find(ids.first).word.capitalize
   			len = ids.length
     		rel = @user.relationships.find_by(word_id: ids.first)
     	else

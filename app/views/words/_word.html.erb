@@ -1,11 +1,13 @@
-<li>
+<li class="list-group-item">
 	<%= link_to word.word, word, remote: true, class: "word" %>
 	<% if logged_in? %>
-	<%= render "words/add_form", word: word %>
-		<% if current_user.admin? %>
-			| <%= link_to "edit", edit_word_path(word) %>
-			| <%= link_to "delete", word, method: :delete,
-																		data: { confirm: "You sure?" } %>
-		<% end %>
+    <div class="word-controls">
+  	  <%= render "words/add_form", word: word %>
+  		<% if current_user.admin? %>
+  			<%= link_to "edit", edit_word_path(word) %>
+  			<%= link_to "delete", word, method: :delete,
+  																	data: { confirm: "You sure?" } %>
+  		<% end %>
+    </div>
 	<% end %>
 </li>

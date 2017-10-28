@@ -1,12 +1,75 @@
 <% provide(:title, "Study") %>
 
-<main id="study-field">
-  <%= render "word_study_field", word: @word %>
-</main>
+<div class="row">
+  <div class="col-md-6 offset-md-3 text-center" id="study-field">
+
+    <% unless @word.nil? %>
+
+      <h1><%= @word.word.capitalize %></h1>
+
+      <button type="button" id="exp-btn" class="btn btn-dark toggle-button">
+        Show Example
+      </button>
+      <button type="button" id="def-btn" class="btn btn-dark toggle-button">
+        Show Definition
+      </button>
+
+      <div id="exp" class="answer-field">
+        <h2>Examples</h2>
+        <p><%= @word.sentence %></p>
+      </div>
+
+      <div id="def" class="answer-field">
+        <h2>Definition</h2>
+        <p><%= @word.definition %></p>
+      </div>
+
+      <hr>
+
+      <div class="btn-group" role="group" aria-label="Study controls">
+        <%= link_to "nope", study_path(button: "nope"),
+            class: "btn btn-danger", remote: true %>
+        <%= link_to "yeah", study_path(button: "yeah"),
+            class: "btn btn-info", remote: true %>
+        <%= link_to "easy", study_path(button: "easy"),
+            class: "btn btn-primary", remote: true %>
+        <%= link_to "know", study_path(button: "know"),
+            class: "btn btn-success", remote: true %>
+      </div>
+
+    <% else %>
+
+      <p>You studied all words for today</p>
+
+    <% end %>
+    
+  </div>
+</div>
 
 <script>
 	(function () {
-		"use strict";
-		words_global_object.prepare_study_field();
+    "use strict";
+
+    var $expBtn = $("#exp-btn");
+    var $defBtn = $("#def-btn");
+    var $btns = $(".toggle-button");
+    var $exp = $("#exp");
+    var $def = $("#def");
+    var $fields = $(".answer-field");
+
+    function toggle () {
+      $btns.toggleClass("btn-light").toggleClass("btn-dark");
+      $fields.toggle();
+    }
+
+		$btns.click(function () {
+      if ($expBtn.hasClass("btn-dark") && $defBtn.hasClass("btn-dark")) {
+        $(this).removeClass("btn-dark").addClass("btn-light");
+        $("#" + $(this).attr("id").slice(0, 3)).show();
+        return;
+      }
+      toggle();
+    });
+
 	}());
 </script>

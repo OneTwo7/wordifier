@@ -12,7 +12,7 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
 		get words_path
 		assert_response :success
 		assert_template "words/index"
-		assert_select "title", get_title("Words")
+		assert_select "title", get_title("Words List")
 		assert_select 'div.pagination', count: 2
 	end
 

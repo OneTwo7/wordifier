@@ -53,10 +53,10 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
 
   test "words index links" do
     get words_path
-    assert_select "nav#word_lists", count: 0
+    assert_select "nav#words-list-nav", count: 0
     log_in_as(@other)
     get words_path
-    assert_select "nav#word_lists"
+    assert_select "nav#words-list-nav"
   end
 
 end

@@ -1,35 +1,72 @@
-<% provide(:title, @title) %>
+<% provide(:title, "Words List") %>
 
-<h1><%= @title %></h1>
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<h1 class="text-center">Words</h1>
 
-<% if logged_in? %>
+		<% if logged_in? %>
 
-	<nav id="word_lists">
-		<%= link_to "All", words_path, remote: true %>
-		<%= link_to "Added", words_path(list: "words"), remote: true %>
-		<%= link_to "To study", words_path(list: "words_to_study"), remote: true %>
-		<%= link_to "Studied", words_path(list: "studied"), remote: true %>
-		<%= link_to "New", words_path(list: "new_words"), remote: true %>
-		<%= link_to "Known", words_path(list: "known_words"), remote: true %>
-		<%= link_to "Learned", words_path(list: "learned_words"), remote: true %>
-	</nav>
+			<nav class="navbar navbar-expand-xl navbar-light" id="words-navbar">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#words-list-navbar" aria-controls="wordsListNavbar" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div id="words-list-navbar" class="collapse navbar-collapse">
+					<nav id="words-list-nav" class="navbar-nav nav nav-pills nav-justified">
+						<%= link_to "All", words_path, class: "nav-item nav-link active", remote: true %>
+						<%= link_to "Added", words_path(list: "words"), class: "nav-item nav-link", remote: true %>
+						<%= link_to "To study", words_path(list: "words_to_study"), class: "nav-item nav-link", remote: true %>
+						<%= link_to "Studied", words_path(list: "studied"), class: "nav-item nav-link", remote: true %>
+						<%= link_to "New", words_path(list: "new_words"), class: "nav-item nav-link", remote: true %>
+						<%= link_to "Known", words_path(list: "known_words"), class: "nav-item nav-link", remote: true %>
+						<%= link_to "Learned", words_path(list: "learned_words"), class: "nav-item nav-link", remote: true %>
+					</nav>
+				</div>
+			</nav>
 
-<% end %>
+		<% end %>
 
-<div id="word-modal" class="hidden">
-	<button type="button" class="close-modal close-btn">&times;</button>
-	<div id="word-modal-content"></div>
-	<button type="button" class="close-modal btn">Close</button>
-</div>
+		<!-- Modal -->
+		<div class="modal fade" id="word-modal" tabindex="-1" role="dialog" aria-labelledby="word-title" aria-hidden="true">
+		  <div class="modal-dialog modal-lg" role="document">
+		    <div class="modal-content" id="word-modal-content">
+		    	<div class="modal-header">
+					  <h2 class="modal-title text-center" id="word-title"></h2>
+					  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+					</div>
+					<div class="modal-body text-center">
+					  <h3>Definition</h3>
+					  <p id="word-definition"></p>
+					  <h3>Examples</h3>
+					  <p id="word-examples"></p>
+					</div>
+					<div class="modal-footer">
+					  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+		    </div>
+		  </div>
+		</div>
 
-<div id="words_list">
-	<%= render "words/words", words: @words %>
+		<div id="words_list">
+			<%= render "words/words", words: @words %>
+		</div>
+	</div>
 </div>
 
 <script>
 	(function () {
 		"use strict";
-		words_global_object.prepare_word_modal();
+		var $navBtns = $("#words-list-nav a");
+		var list = "<%= @list %>";
+		if (list) {
+			$navBtns.filter(".active").removeClass("active");
+			$("a[href='/words?list=" + list + "']").addClass("active");
+		}
 		$(".pagination a").attr("data-remote", "true");
+		$navBtns.click(function () {
+			$navBtns.filter(".active").removeClass("active");
+			$(this).addClass("active");
+		});
 	}());
 </script>

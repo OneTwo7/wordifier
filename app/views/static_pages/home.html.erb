@@ -1,10 +1,14 @@
-<% if logged_in? %>
-	<%= link_to "Add a new word", new_word_path, class: "btn" %>
-	<% if current_user.words_to_study.any? %>
-		<%= link_to "Study words", study_path, class: "btn" %>
-	<% end %>
-<% else %>
-	<h1>Wordifier</h1>
-	<p class="center">Welcome to Words</p>
-	<%= link_to "Sign up", signup_path, id: "signup", class: "btn" %>
-<% end %>
+<div class="row">
+  <div class="col-md-6 offset-md-3 text-center">
+    <% if logged_in? %>
+    	<%= link_to "Add a new word", new_word_path, class: "btn btn-primary" %>
+    	<% if current_user.words_to_study.any? %>
+    		<%= link_to "Study words", study_path, class: "btn btn-primary" %>
+    	<% end %>
+    <% else %>
+    	<h1>Words</h1>
+    	<p>Welcome to Words</p>
+    	<%= link_to "Sign up", signup_path, id: "signup", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

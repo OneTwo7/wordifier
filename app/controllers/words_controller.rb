@@ -5,10 +5,10 @@ class WordsController < ApplicationController
 	before_action :admin_user,     only: [:edit, :update, :destroy]
 
 	def index
-		@title = "Words"
 		unless logged_in? and !params[:list].nil?
 			@words = Word.paginate(page: params[:page])
 		else
+			@list = params[:list]
 			@words = current_user.send(params[:list]).paginate(page: params[:page])
 		end
 		respond_to do |format|

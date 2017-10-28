@@ -1,3 +1,11 @@
 <% provide(:title, @word.word.capitalize) %>
 
-<%= render "show_word", word: @word %>
+<div class="row">
+  <div class="col-md-6 offset-md-3 text-center">
+    <h1><%= @word.word.capitalize %></h1>
+    <p class="lead">Definition</p>
+    <p><%= @word.definition %></p>
+    <p class="lead">Examples</p>
+    <p><%= @word.sentence %></p>
+  </div>
+</div>

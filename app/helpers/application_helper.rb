@@ -1,7 +1,7 @@
 module ApplicationHelper
 
 	def get_title(title="")
-		base_title = "Wordifier"
+		base_title = "Words"
 		if title.blank?
 			base_title
 		else

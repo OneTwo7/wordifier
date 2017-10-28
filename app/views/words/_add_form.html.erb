@@ -1,4 +1,4 @@
-<div id="add_form_<%= word.id %>">
+<div id="add_form_<%= word.id %>" class="add-form">
 	<% if current_user.added?(word) %>
 	  <%= render 'words/remove', word: word %>
 	<% else %>

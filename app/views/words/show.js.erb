@@ -1,7 +1,8 @@
 "use strict";
-var $modal = $("#word-modal");
-var $content = $("#word-modal-content");
-var word = "<%= escape_javascript(render 'show_word', word: @word) %>";
-$content.html(word);
-$("#shadow").css("z-index", 3).toggleClass("hidden");
-$modal.removeClass("hidden");
+var word = "<%= escape_javascript(@word.word.capitalize) %>";
+var definition = "<%= escape_javascript(@word.definition) %>";
+var examples = "<%= escape_javascript(@word.sentence) %>";
+$("#word-title").html(word);
+$("#word-definition").html(definition);
+$("#word-examples").html(examples);
+$("#word-modal").modal();

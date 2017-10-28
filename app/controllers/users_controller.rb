@@ -11,6 +11,14 @@ class UsersController < ApplicationController
 
   def show
 		@user = User.find(params[:id])
+    @lists = {
+      words:          "Added",
+      words_to_study: "To Study",
+      studied:        "Studied",
+      new_words:      "New",
+      known_words:    "Known",
+      learned_words:  "Learned"
+    }
     redirect_to root_url and return unless @user.activated?
 	end
 

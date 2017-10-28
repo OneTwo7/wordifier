@@ -1,46 +1,21 @@
 <% provide(:title, @user.name) %>
 
-<section id="profile">
-	<h1><%= @user.name %></h1>
-	<p class="center">Joined <%= time_ago_in_words(@user.created_at) %> ago</p>
+<div class="row">
+	<section class="col-md-6 offset-md-3" id="profile">
+		<h1><%= @user.name %></h1>
+		<p class="center">Joined <%= time_ago_in_words(@user.created_at) %> ago</p>
 
-	<hr>
+		<hr>
 
-	<ul id="profile-list">
-		<%= link_to words_user_path(@user) do %>
-			<li>
-			  Added <span class="words-count"><%= @user.words.count %></span>
-			</li>
-		<% end %>
-		<%= link_to words_path(list: "words_to_study") do %>
-			<li>
-				To study
-				<span class="words-count"><%= @user.words_to_study.count %></span>
-			</li>
-		<% end %>
-		<%= link_to words_path(list: "studied") do %>
-			<li>
-				Studied
-				<span class="words-count"><%= @user.studied.count %></span>
-			</li>
-		<% end %>
-		<%= link_to words_path(list: "new_words") do %>
-			<li>
-				New
-				<span class="words-count"><%= @user.new_words.count %></span>
-			</li>
-		<% end %>
-		<%= link_to words_path(list: "known_words") do %>
-			<li>
-				Known
-				<span class="words-count"><%= @user.known_words.count %></span>
-			</li>
-		<% end %>
-		<%= link_to words_path(list: "learned_words") do %>
-			<li>
-				Learned
-				<span class="words-count"><%= @user.learned_words.count %></span>
-			</li>
-		<% end %>
-	</ul>
-</section>
+		<div id="list-group">
+			<% @lists.each do |list, title| %>
+				<%= link_to words_path(list: list.to_s), class: "list-group-item list-group-item-action  d-flex justify-content-between align-items-center" do %>
+					<%= title %>
+					<span class="badge badge-primary badge-pill">
+						<%= @user.send(list).count %>
+					</span>
+				<% end %>
+			<% end %>
+		</div>
+	</section>
+</div>
