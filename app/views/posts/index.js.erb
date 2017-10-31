@@ -1,0 +1,6 @@
+"use strict";
+var $posts = $("#posts");
+$posts.empty();
+var posts = "<%= escape_javascript(render 'posts') %>";
+$posts.append(posts);
+$(".pagination a").attr("data-remote", "true");

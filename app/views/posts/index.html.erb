@@ -1,0 +1,26 @@
+<% provide(:title, "News") %>
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+
+    <h1 class="text-center">News</h1>
+
+    <% if logged_in? && current_user.admin? %>
+      <%= render "form", url: posts_path, submit_text: "Create post" %>
+    <% end %>
+
+    <div id="posts">
+
+      <%= render "posts" %>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    "use strict";
+    $(".pagination a").attr("data-remote", "true");
+  }());
+</script>

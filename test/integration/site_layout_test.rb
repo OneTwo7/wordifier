@@ -18,6 +18,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
   	assert_select "a[href=?]", signup_path
     assert_select "a[href=?]", users_path, count: 0
     assert_select "a[href=?]", words_path
+    assert_select "a[href=?]", posts_path
   	get contact_path
   	assert_select "title", get_title("Contact")
   	get signup_path
@@ -30,6 +31,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     log_in_as(@admin)
     get root_path
     assert_select "a[href=?]", users_path
+    assert_select "a[href=?]", posts_path
   end
 
   test "words links" do

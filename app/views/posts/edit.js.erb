@@ -1,0 +1,4 @@
+"use strict";
+var $post = $("#post-<%= @post.id %>");
+var $form = $("<%= escape_javascript(render 'form', url: post_path(@post), submit_text: 'Update') %>");
+$post.replaceWith($form);

@@ -23,7 +23,8 @@ class WordsControllerTest < ActionDispatch::IntegrationTest
 			get words_path(list: list)
 			assert_response :success
 			assert_template "words/index"
-			assert_select "ul.words li", count: @other.send(list).count
+      count = @other.send(list).count > 20 ? 20 : @other.send(list).count
+			assert_select "ul.words li", count: count
 		end
 	end
   

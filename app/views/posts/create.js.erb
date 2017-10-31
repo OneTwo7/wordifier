@@ -1,0 +1,13 @@
+"use strict";
+var $form = $("#new_post");
+<% if !@post.errors.any? %>
+  $form.children(".error-explanation").remove();
+  var $post = $("<%= escape_javascript(render 'post', post: @post) %>").hide();
+  $(".posts").prepend($post);
+  $post.fadeIn('slow');
+  $("#new_post")[0].reset();
+<% else %>
+  $form.children(".error-explanation").remove();
+  var $err = $("<%= escape_javascript(render 'shared/error_messages', object: @post) %>");
+  $form.prepend($err);
+<% end %>

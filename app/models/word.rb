@@ -5,7 +5,7 @@ class Word < ApplicationRecord
 
 	before_save :downcase_word
 
-	self.per_page = 50
+	self.per_page = 20
 
 	validates :word, presence: true, length: { maximum: 30 },
 									 uniqueness: { case_sensitive: false }

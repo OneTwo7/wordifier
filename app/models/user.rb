@@ -2,6 +2,7 @@ class User < ApplicationRecord
 
   has_many :relationships, dependent: :destroy
   has_many :words, through: :relationships
+  has_many :posts, dependent: :destroy
 
 	attr_accessor :remember_token, :activation_token, :reset_token
 

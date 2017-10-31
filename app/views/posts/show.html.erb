@@ -1,0 +1,9 @@
+<% provide(:title, @post.title) %>
+
+<div class="row">
+  <article class="col-md-6 offset-md-3 text-center">
+    <h1><%= @post.title %></h1>
+    <p><%= @post.content %></p>
+    <p><%= @post.user.name %></p>
+  </article>
+</div>

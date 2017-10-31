@@ -1,0 +1,16 @@
+one:
+  title: MyString
+  content: MyText
+  user: one
+
+two:
+  title: MyString
+  content: MyText
+  user: one
+
+<% 10.times do |n| %>
+post_<%= n %>:
+  title:  <%= "post #{n}" %>
+  content: content
+  user: one
+<% end %>

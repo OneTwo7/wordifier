@@ -1,0 +1,5 @@
+"use strict";
+var $post = $("#post-<%= @id %>");
+$post.hide('fast', function () {
+  $post.remove();
+});
