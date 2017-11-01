@@ -12,9 +12,16 @@
     ago by
     <%= link_to post.user.name, post.user %>
   </p>
-  <% if logged_in? && current_user.admin? %>
-    <%= link_to "edit", edit_post_path(post), remote: true %>
-    <%= link_to "delete", post, method: :delete,
-        data: { confirm: "Are you sure?" }, remote: true %>
-  <% end %>
+  <div class="post-links">
+    <span>
+      <% if logged_in? && current_user.admin? %>   
+        <%= link_to "edit", edit_post_path(post), remote: true %>
+        <%= link_to "delete", post, method: :delete,
+            data: { confirm: "Are you sure?" }, remote: true %>   
+      <% end %>
+    </span>
+    <a href="/posts/<%= post.id %>#comments">
+      comments (<%= post.comments.count %>)
+    </a>
+  </div>
 </li>

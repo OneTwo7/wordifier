@@ -1,0 +1,8 @@
+"use strict";
+var $comments = $("<%= escape_javascript(render @comments) %>");
+$(".comments").append($comments);
+if ($(".comments li").length === parseInt("<%= @post.comments.count %>")) {
+  $("#load-more-btn").remove();
+} else {
+  $("#load-more-btn").attr("href", "<%= @href %>");
+}

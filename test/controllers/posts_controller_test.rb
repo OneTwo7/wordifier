@@ -61,6 +61,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'Post.count', 1 do
       post posts_path, xhr: true, params: @params
     end
+    assert flash.empty?
   end
 
   test "should create a post" do
@@ -77,6 +78,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     patch post_path(@post), params: @params, xhr: true
     @post.reload
     assert_equal "new title", @post.title
+    assert flash.empty?
   end
 
   test "should update a post" do
@@ -93,6 +95,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'Post.count', -1 do
       delete post_path(@post), xhr: true
     end
+    assert flash.empty?
   end
 
   test "should destroy a post" do

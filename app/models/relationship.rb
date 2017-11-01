@@ -5,7 +5,7 @@ class Relationship < ApplicationRecord
 
 	before_create :add_study_at
 
-	validates :points, 	 presence: true, inclusion: { in: 0..10 }
+	validates :points, presence: true, inclusion: { in: 0..10 }
 
 	#update relationship according to the button pressed by user
 	def study (button="yeah")

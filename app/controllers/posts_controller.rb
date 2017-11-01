@@ -14,6 +14,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comment = Comment.new
+    @comments = @post.comments.limit(10)
   end
 
   def create
@@ -63,6 +65,16 @@ class PostsController < ApplicationController
         flash[:success] = "Post has been successfully deleted"
         redirect_to posts_url
       }
+      format.js
+    end
+  end
+
+  def load_more
+    @post = Post.find(params[:post_id])
+    offset = params[:offset].to_i
+    @comments = @post.comments.offset(offset * 10).limit(10)
+    @href = "/load_more?offset=#{offset + 1}&post_id=#{params[:post_id]}"
+    respond_to do |format|
       format.js
     end
   end

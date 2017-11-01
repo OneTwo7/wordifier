@@ -1,0 +1,12 @@
+<li id="comment-<%= comment.id %>">
+  <p><%= comment.content %></p>
+  <span class="text-muted">
+    Posted by <%= link_to comment.user.name, comment.user %>
+    on <%= comment.created_at.strftime("%e %b %Y %I:%M%p") %>
+  </span>
+  <% if logged_in? && (current_user.admin? || current_user?(comment.user)) %>
+    <%= link_to "edit", edit_post_comment_path(@post, comment), remote: true %>
+    <%= link_to "delete", post_comment_path(@post, comment), method: :delete,
+        data: { confirm: "Are you sure?" }, remote: true %>
+  <% end %>
+</li>

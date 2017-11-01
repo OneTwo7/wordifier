@@ -1,0 +1,4 @@
+"use strict";
+var $comment = $("#comment-<%= @comment.id %>");
+var $form = $("<%= escape_javascript(render 'form', url: post_comment_path(@post, @comment), submit_text: 'Update') %>");
+$comment.replaceWith($form);

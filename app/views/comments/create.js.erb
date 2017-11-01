@@ -1,0 +1,14 @@
+"use strict";
+var $form = $("#new_comment");
+<% if !@comment.errors.any? %>
+  $form.children(".error-explanation").remove();
+  var $comment = $("<%= escape_javascript(render 'comment', comment: @comment) %>").hide();
+  $(".comments").append($comment);
+  $("#comments-count").text("<%= @post.comments.count %>");
+  $comment.fadeIn('slow');
+  $("#new_comment")[0].reset();
+<% else %>
+  $form.children(".error-explanation").remove();
+  var $err = $("<%= escape_javascript(render 'shared/error_messages', object: @comment) %>");
+  $form.prepend($err);
+<% end %>

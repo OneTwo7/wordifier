@@ -1,9 +1,31 @@
 <% provide(:title, @post.title) %>
+<% count = @post.comments.count %>
 
 <div class="row">
-  <article class="col-md-6 offset-md-3 text-center">
-    <h1><%= @post.title %></h1>
-    <p><%= @post.content %></p>
-    <p><%= @post.user.name %></p>
-  </article>
+  <div class="col-md-6 offset-md-3">
+
+    <article class="text-center" id="post">
+      <h1><%= @post.title %></h1>
+      <p><%= @post.content %></p>
+      <span class="text-muted">
+        Posted by <%= link_to @post.user.name, @post.user %>
+        on <%= @post.created_at.strftime("%e %b %Y %I:%M%p") %>
+      </span>
+    </article>
+
+    <section id="comments">
+      <h2 class="text-center">
+        Comments (<span id="comments-count"><%= count %></span>)
+      </h2>
+      <%= render "comments/form", url: post_comments_path(@post),
+          submit_text: "Create comment" if logged_in? %>
+      <ul class="comments">
+        <%= render @comments %>
+      </ul>
+      <%= link_to "Load more comments",
+          load_more_path(post_id: @post.id, offset: 1),
+          remote: true, class: "btn btn-primary",
+          id: "load-more-btn" if count > 10 %>
+    </section>
+  </div>
 </div>

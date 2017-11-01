@@ -1,0 +1,11 @@
+"use strict";
+var $form = $("#edit_comment_<%= @comment.id %>");
+<% if !@comment.errors.any? %>
+  $form.children(".error-explanation").remove();
+  var $comment = $("<%= escape_javascript(render 'comment', comment: @comment) %>");
+  $form.replaceWith($comment);
+<% else %>
+  $form.children(".error-explanation").remove();
+  var $err = $("<%= escape_javascript(render 'shared/error_messages', object: @comment) %>");
+  $form.prepend($err);
+<% end %>
