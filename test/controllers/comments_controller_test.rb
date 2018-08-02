@@ -5,6 +5,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:two)
     @post = posts(:one)
+    @post_2 = posts(:two)
     @comment = comments(:two)
     @params = {
       comment: {
@@ -60,6 +61,11 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_not flash.empty?
     assert_redirected_to @post
+  end
+
+  test "should show 10 comments" do
+    get post_path(@post_2)
+    assert_select "ul.comments li", count: 10
   end
 
 end

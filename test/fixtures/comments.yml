@@ -7,3 +7,10 @@ two:
   content: MyString
   user: two
   post: one
+
+<% 25.times do |n| %>
+comment_<%= n %>:
+  content: content
+  user: one
+  post: two
+<% end %>

@@ -1,3 +1,3 @@
 # README
 
-## This application is currently in development 5/24/2017
+This application is currently in development 2018-08-02
